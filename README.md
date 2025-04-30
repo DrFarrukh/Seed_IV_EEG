@@ -80,7 +80,9 @@ This project focuses on classifying EEG (electroencephalogram) data using machin
 | Balanced Final Model | 66.67% | 30 optimized | Reduced features, balanced performance |
 | Super Learner | 62.96% | Combined approaches | Meta-learning with deep learning |
 | Advanced Ensemble | 30.56% | Augmented data | Deep learning with data augmentation |
-| **Optimized Stacking** | **72.22%** | **20 optimized** | **Best overall performance** |
+| Optimized Stacking | 72.22% | 20 optimized | Traditional model stacking |
+| Deep PCA Model | 61.11% | 20 optimized | Neural network on PCA features |
+| **Deep PCA + Weighted Ensemble** | **72.22%** | **20 optimized** | **Equal-weighted model combination** |
 
 ## Key Insights
 
