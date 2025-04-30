@@ -69,23 +69,33 @@ This project focuses on classifying EEG (electroencephalogram) data using machin
 |----------|----------|----------|-------|
 | Flattened Data | ~33-35% | Original features | Baseline approach |
 | Trial-based | ~65-70% | Channel-preserved features | Preserves channel structure |
-| PCA (20 components) | 68.06% | 20 (87.32% variance) | Best performance/complexity ratio |
+| PCA (20 components) | 68.06% | 20 (87.32% variance) | Good performance/complexity ratio |
 | PCA (94 components) | 67.59% | 94 (95% variance) | More features, similar performance |
-| PCA (100 components) | 68.52% | 100 (96% variance) | Highest overall accuracy |
+| PCA (100 components) | 68.52% | 100 (96% variance) | High accuracy with many features |
 | Channel-CNN | 25.00% | 3D structure | Spatial patterns only |
 | Epoch-LSTM | 42.59% | 3D structure | Temporal patterns only |
 | EEGNet-inspired | 49.07% | 3D structure | Combined spatial-temporal |
 | Hybrid Model | 63.89% | 522 combined | Channel, epoch, and global features |
 | Specialized Ensemble | 66.67% | 50 optimized | Class-specific models, reduced features |
+| Balanced Final Model | 66.67% | 30 optimized | Reduced features, balanced performance |
+| Super Learner | 62.96% | Combined approaches | Meta-learning with deep learning |
+| Advanced Ensemble | 30.56% | Augmented data | Deep learning with data augmentation |
+| **Optimized Stacking** | **72.22%** | **20 optimized** | **Best overall performance** |
 
 ## Key Insights
 
-1. **Dimensionality reduction is crucial**: PCA-based approaches consistently outperform models using raw features.
+1. **Dimensionality reduction is crucial**: PCA-based approaches consistently outperform models using raw features, with 20 components providing the optimal balance.
 
-2. **Channel information is most important**: Channel-specific features contribute 76.72% of predictive power.
+2. **Channel information is most important**: Channel-specific features contribute significantly to predictive power, particularly from channels 61, 58, 2, and 31.
 
-3. **Class-specific performance varies**: Class 2 is consistently best classified (F1-score: 0.82), while Class 3 remains most challenging.
+3. **Class-specific performance varies**: Class 2 (F1-score: 0.82) and Class 1 (F1-score: 0.83) are consistently better classified than Classes 0 and 3.
 
-4. **Feature selection matters**: Reducing from 522 to 50 features while maintaining performance demonstrates the importance of targeted feature engineering.
+4. **Feature selection matters**: Reducing from 490 to 20 features while improving performance demonstrates the importance of targeted feature engineering.
 
-5. **Specialized models work better**: Different classifier types perform better for different classes, supporting the specialized ensemble approach.
+5. **Ensemble architecture is critical**: Stacking ensemble (72.22%) outperforms voting ensemble (66.67%) by using a meta-learner that learns optimal combinations of base models.
+
+6. **Hyperparameter tuning yields significant gains**: Grid search optimization of base models improved overall performance by ~4% compared to default parameters.
+
+7. **Deep learning requires more data**: Our deep learning approaches underperformed traditional methods, likely due to limited training samples (only 360 trials).
+
+8. **Model-specific strengths**: SVM works best for Class 0, Random Forest for Class 1, Gradient Boosting for Class 2, and a combination approach for Class 3.
