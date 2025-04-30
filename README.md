@@ -29,15 +29,21 @@ This project focuses on classifying EEG (electroencephalogram) data using machin
 
 ### 4. PCA Dimensionality Reduction
 - Reduced feature space from 3,038 to 94 components (95% variance preserved)
-- Tested different numbers of components (10-200)
-- Best accuracy: 68.52% with 100 PCA components
+- Tested different numbers of components (5-100)
+- Found optimal performance with 20 PCA components (87.32% variance preserved)
+- Achieved 68.06% cross-validation accuracy with 20 components
 
-### 5. Current Work
-- Implementing domain-specific EEG feature engineering
-- Developing ensemble methods for improved classification
-- Creating specialized features based on EEG literature
+### 5. Optimal PCA Analysis
+- Systematically tested different component counts (5, 10, 15, 20, 25, 30, 40, 50, 75, 100)
+- Identified sweet spot at 20 components (152x dimensionality reduction)
+- Balanced performance vs. complexity with 87.32% variance preserved
 
-### 6. Future Plans
+### 6. Current Work
+- Fine-tuning classifiers with optimal 20 PCA components
+- Implementing ensemble methods for improved classification
+- Creating specialized EEG features with optimal dimensionality
+
+### 7. Future Plans
 - Apply deep learning approaches (EEGNet, RNNs)
 - Explore time-frequency representations
 - Implement advanced hyperparameter tuning
@@ -50,8 +56,8 @@ This project focuses on classifying EEG (electroencephalogram) data using machin
 - `eeg_3d_analysis.py`: Analysis of 3D structure and trial-based classification
 - `eeg_trial_classification.py`: Classification based on trial features
 - `eeg_trial_pca_fixed.py`: PCA applied to trial-based features
-- `eeg_domain_features.py`: Domain-specific EEG feature engineering (current work)
-- `eeg_ensemble_classification.py`: Ensemble methods for classification (current work)
+- `eeg_optimal_pca.py`: Analysis to find optimal number of PCA components
+- `eeg_ensemble_optimal.py`: Ensemble methods with optimal PCA components (current work)
 
 ## Results Summary
 
@@ -60,5 +66,6 @@ This project focuses on classifying EEG (electroencephalogram) data using machin
 | Flattened Data | ~33-35% | Original features |
 | Trial-based | ~65-70% | Channel-preserved features |
 | PCA (94 components) | 67.59% | 95% variance preserved |
-| PCA (100 components) | 68.52% | Optimal component count |
-| Domain-specific + Ensemble | In progress | EEG-specific features |
+| PCA (20 components) | 68.06% | 87.32% variance preserved |
+| PCA (100 components) | 68.52% | More components, similar performance |
+| Ensemble with 20 PCA components | In progress | Optimal dimensionality |
