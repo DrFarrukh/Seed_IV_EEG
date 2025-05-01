@@ -43,10 +43,17 @@ This project focuses on classifying EEG (electroencephalogram) data using machin
 - Implementing ensemble methods for improved classification
 - Creating specialized EEG features with optimal dimensionality
 
-### 7. Future Plans
-- Apply deep learning approaches (EEGNet, RNNs)
-- Explore time-frequency representations
-- Implement advanced hyperparameter tuning
+### 7. Advanced Deep Learning Approaches
+- Implemented CNN, Transformer, and Dense neural networks with PCA features
+- Applied k-fold cross-validation (5-fold) for robust performance evaluation
+- Increased regularization with L1=5e-5, L2=5e-4 and higher dropout rates
+- Implemented ensemble methods combining models from different folds
+- Applied data augmentation techniques to improve model robustness
+
+### 8. Future Plans
+- Explore hybrid architectures combining CNN and Transformer elements
+- Implement attention mechanisms specific to EEG data
+- Apply transfer learning from pre-trained EEG models
 
 ## Files Description
 
@@ -62,6 +69,8 @@ This project focuses on classifying EEG (electroencephalogram) data using machin
 - `eeg_3d_classification.py`: 3D classification using CNN, LSTM, and EEGNet architectures
 - `eeg_hybrid_model.py`: Combined approach using channel-specific, epoch-specific, and global PCA
 - `eeg_specialized_ensemble.py`: Optimized model with class-specific classifiers
+- `eeg_enhanced_deep_pca.py`: Enhanced Deep PCA model with data augmentation and regularization
+- `eeg_deep_pca_final.py`: Final Deep PCA model with CNN, Transformer, and Dense architectures
 
 ## Results Summary
 
@@ -82,22 +91,30 @@ This project focuses on classifying EEG (electroencephalogram) data using machin
 | Advanced Ensemble | 30.56% | Augmented data | Deep learning with data augmentation |
 | Optimized Stacking | 72.22% | 20 optimized | Traditional model stacking |
 | Deep PCA Model | 61.11% | 20 optimized | Neural network on PCA features |
-| **Deep PCA + Weighted Ensemble** | **72.22%** | **20 optimized** | **Equal-weighted model combination** |
+| Deep PCA + Weighted Ensemble | 72.22% | 20 optimized | Equal-weighted model combination |
+| Deep PCA + Cross-validation | 62.22% ± 5.28% | 30 optimized | 5-fold cross-validation |
+| **Deep PCA Dense Ensemble** | **66.67%** | **30 optimized** | **Dense architecture with ensemble** |
+| Deep PCA CNN Ensemble | 57.41% | 30 optimized | CNN architecture with ensemble |
+| Deep PCA Transformer Ensemble | 58.33% | 30 optimized | Transformer architecture with ensemble |
 
 ## Key Insights
 
-1. **Dimensionality reduction is crucial**: PCA-based approaches consistently outperform models using raw features, with 20 components providing the optimal balance.
+1. **Dimensionality reduction is crucial**: PCA-based approaches consistently outperform models using raw features, with 20-30 components providing the optimal balance.
 
 2. **Channel information is most important**: Channel-specific features contribute significantly to predictive power, particularly from channels 61, 58, 2, and 31.
 
-3. **Class-specific performance varies**: Class 2 (F1-score: 0.82) and Class 1 (F1-score: 0.83) are consistently better classified than Classes 0 and 3.
+3. **Class-specific performance varies**: Class 2 (F1-score: 0.75-0.82) and Class 1 (F1-score: 0.71-0.83) are consistently better classified than Classes 0 and 3.
 
-4. **Feature selection matters**: Reducing from 490 to 20 features while improving performance demonstrates the importance of targeted feature engineering.
+4. **Feature selection matters**: Reducing from 490 to 20-30 features while improving performance demonstrates the importance of targeted feature engineering.
 
 5. **Ensemble architecture is critical**: Stacking ensemble (72.22%) outperforms voting ensemble (66.67%) by using a meta-learner that learns optimal combinations of base models.
 
 6. **Hyperparameter tuning yields significant gains**: Grid search optimization of base models improved overall performance by ~4% compared to default parameters.
 
-7. **Deep learning requires more data**: Our deep learning approaches underperformed traditional methods, likely due to limited training samples (only 360 trials).
+7. **Neural network architecture selection is important**: Dense networks (66.67%) outperformed both CNN (57.41%) and Transformer (58.33%) architectures when using PCA features.
 
-8. **Model-specific strengths**: SVM works best for Class 0, Random Forest for Class 1, Gradient Boosting for Class 2, and a combination approach for Class 3.
+8. **Cross-validation provides robust estimates**: 5-fold cross-validation showed consistent performance across folds with standard deviations of 5-6%.
+
+9. **Data augmentation improves robustness**: Applying noise, time warping, and spectral augmentation helped models generalize better to unseen data.
+
+10. **Model-specific strengths**: SVM works best for Class 0, Random Forest for Class 1, Gradient Boosting for Class 2, and a combination approach for Class 3.

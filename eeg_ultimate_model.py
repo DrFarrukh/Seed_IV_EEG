@@ -554,34 +554,28 @@ def create_spatial_cnn_model(input_shape):
 
 # 4. Complex 3D model (EEGNet-inspired)
 def create_eegnet_model(input_shape):
-    # Reshape input to (channels, epochs, features)
+    # Create input layer
     inputs = Input(shape=input_shape)
     
-    # Reshape to (channels, epochs*features) for 1D convolutions
-    reshaped = Reshape((input_shape[0], input_shape[1] * input_shape[2]))(inputs)
+    # Flatten the 3D input to 2D for simpler processing
+    # Convert (channels, epochs, features) to (samples, flattened_features)
+    flattened = Flatten()(inputs)
     
-    # First block - temporal convolution
-    block1 = Conv1D(16, kernel_size=64, padding='same', 
-                   activation='elu', input_shape=(input_shape[0], input_shape[1] * input_shape[2]))(reshaped)
-    block1 = BatchNormalization()(block1)
-    block1 = AveragePooling2D(pool_size=(1, 4))(Reshape((1, input_shape[0], 16))(block1))
-    block1 = Dropout(0.25)(block1)
+    # Dense network instead of complex reshaping
+    dense1 = Dense(256, activation='relu', kernel_regularizer=l1_l2(l1=1e-5, l2=1e-4))(flattened)
+    dense1 = BatchNormalization()(dense1)
+    dense1 = Dropout(0.4)(dense1)
     
-    # Second block - spatial convolution
-    block2 = Reshape((input_shape[0], 16))(block1)
-    block2 = Conv1D(32, kernel_size=16, padding='same', activation='elu')(block2)
-    block2 = BatchNormalization()(block2)
-    block2 = AveragePooling2D(pool_size=(1, 8))(Reshape((1, input_shape[0], 32))(block2))
-    block2 = Dropout(0.25)(block2)
+    dense2 = Dense(128, activation='relu', kernel_regularizer=l1_l2(l1=1e-5, l2=1e-4))(dense1)
+    dense2 = BatchNormalization()(dense2)
+    dense2 = Dropout(0.4)(dense2)
     
-    # Flatten and dense layers
-    flatten = Flatten()(block2)
-    dense = Dense(64, activation='relu', kernel_regularizer=l1_l2(l1=1e-5, l2=1e-4))(flatten)
-    dense = BatchNormalization()(dense)
-    dense = Dropout(0.5)(dense)
+    dense3 = Dense(64, activation='relu', kernel_regularizer=l1_l2(l1=1e-5, l2=1e-4))(dense2)
+    dense3 = BatchNormalization()(dense3)
+    dense3 = Dropout(0.3)(dense3)
     
     # Output layer
-    output = Dense(4, activation='softmax')(dense)
+    output = Dense(4, activation='softmax')(dense3)
     
     model = Model(inputs=inputs, outputs=output)
     model.compile(
@@ -623,24 +617,28 @@ def create_gru_model(input_shape):
 
 # 6. CNN-LSTM hybrid for 3D data
 def create_cnn_lstm_model(input_shape):
-    # Reshape to (channels, epochs, features)
+    # Create input layer
     inputs = Input(shape=input_shape)
     
-    # Apply CNN to each channel-epoch combination
-    reshape1 = Reshape((input_shape[0] * input_shape[1], input_shape[2]))(inputs)
-    conv1 = Conv1D(32, kernel_size=3, padding='same', activation='relu')(reshape1)
-    bn1 = BatchNormalization()(conv1)
-    pool1 = MaxPooling1D(pool_size=2)(bn1)
+    # Flatten the 3D input to 2D for simpler processing
+    flattened = Flatten()(inputs)
     
-    # Reshape back to separate channels and apply LSTM across epochs
-    reshape2 = Reshape((input_shape[0], input_shape[1] // 2, 32))(pool1)
-    time_dist = TimeDistributed(Flatten())(reshape2)
-    lstm = Bidirectional(LSTM(64, return_sequences=False))(time_dist)
+    # First create a dense representation
+    dense1 = Dense(256, activation='relu', kernel_regularizer=l1_l2(l1=1e-5, l2=1e-4))(flattened)
+    dense1 = BatchNormalization()(dense1)
+    dense1 = Dropout(0.4)(dense1)
+    
+    # Reshape to a sequence for LSTM processing
+    # Use a fixed sequence length of 20 with 12 features per step
+    reshaped = Reshape((20, 12))(dense1)
+    
+    # Apply LSTM
+    lstm = Bidirectional(LSTM(64, return_sequences=False))(reshaped)
     drop = Dropout(0.4)(lstm)
     
     # Dense layers
-    dense = Dense(64, activation='relu', kernel_regularizer=l1_l2(l1=1e-5, l2=1e-4))(drop)
-    bn2 = BatchNormalization()(dense)
+    dense2 = Dense(64, activation='relu', kernel_regularizer=l1_l2(l1=1e-5, l2=1e-4))(drop)
+    bn2 = BatchNormalization()(dense2)
     drop2 = Dropout(0.4)(bn2)
     
     # Output layer
