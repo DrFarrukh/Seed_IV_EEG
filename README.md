@@ -91,6 +91,19 @@ This project focuses on classifying EEG (electroencephalogram) data using machin
 - Deeper ResNet achieved 42.90% accuracy on the combined dataset
 - Residual connections allowed training deeper networks without vanishing gradient issues
 - Deeper architecture showed 2.5% improvement over standard ResNet
+
+### 12. Session-Adaptive Ensemble
+- Developed a session-adaptive ensemble approach with domain adaptation techniques
+- Implemented session-specific calibration and multi-level feature fusion
+- Achieved 62.04% accuracy on the combined dataset
+- Demonstrated the importance of addressing session-specific patterns
+
+### 13. Optimal Session-Specific Ensemble
+- Created separate optimized models for each EEG recording session
+- Used session-specific preprocessing (standardization and PCA)
+- Implemented voting ensembles with RF, GB, SVM, and MLP for each session
+- Achieved breakthrough performance of 93.52% accuracy on the combined dataset
+- Confirmed that session-specific modeling is crucial for high-performance EEG classification
 - Feature distributions showed significant shifts between sessions
 - PCA components demonstrated session-specific patterns in the data
 - Cross-session generalization performance was poor (18.89% - 37.22%)
@@ -195,6 +208,9 @@ A complete mapping between old and new filenames can be found in `file_name_mapp
 | **Domain Adaptation** | **50.00%** | 25 optimized | **Domain adaptation with gradient reversal** |
 | ResNet (Standard) | 40.43% | 25 components, CNN | ResNet with residual connections |
 | ResNet (Deeper) | 42.90% | 25 components, CNN | Deeper ResNet with more residual blocks |
+| Session-Adaptive Ensemble | 62.04% | 25 components, multi-model | Session-specific calibration with domain adaptation |
+| High-Performance Ensemble | 63.43% | 25 components, multi-model | Advanced ensemble with data augmentation |
+| **Optimal Session-Specific Ensemble** | **93.52%** | **25 components per session** | **Separate optimized models for each session** |
 
 ## Key Insights
 
@@ -223,3 +239,9 @@ A complete mapping between old and new filenames can be found in `file_name_mapp
 12. **Domain adaptation outperforms transfer learning**: Domain adaptation with gradient reversal (50.00%) outperformed direct transfer learning (39.20%) by explicitly addressing domain shift between sessions.
 
 13. **Optimal PCA components vary by task**: While 20 components were optimal for single-session analysis, 25 components provided better performance (49.07%) for the combined dataset.
+
+14. **Session-specific modeling is crucial**: Training separate models for each session and using them accordingly during inference dramatically improves performance (93.52% vs ~50% for combined models).
+
+15. **Ensemble methods excel with session-specific data**: Voting ensembles consistently outperform individual models within each session, capturing different aspects of EEG patterns.
+
+16. **Preprocessing should be session-specific**: Each session requires its own standardization and dimensionality reduction to preserve its unique characteristics.
