@@ -1,0 +1,46 @@
+EEG Project File Name Mapping
+===========================
+
+This file provides a reference for the renamed Python files in the EEG project.
+
+Categories:
+- 01-05: Data preparation and exploration
+- 06-10: Basic classification
+- 11-15: PCA analysis and optimization
+- 16-20: Ensemble methods
+- 21-25: Advanced models
+- 26-30: Combined sessions and specialized approaches
+
+File Mapping:
+------------
+
+01_eeg_data_exploration.py <- eeg_pca_analysis.py
+02_eeg_3d_visualization.py <- eeg_3d_analysis.py
+03_eeg_summary_visualization.py <- eeg_visualization_summary.py
+04_eeg_feature_engineering.py <- eeg_domain_features.py
+05_eeg_initial_classification.py <- eeg_quick_classification.py
+06_eeg_basic_classification.py <- eeg_classification.py
+07_eeg_trial_based_classification.py <- eeg_trial_classification.py
+08_eeg_advanced_classification.py <- eeg_advanced_classification.py
+09_eeg_balanced_model.py <- eeg_balanced_final.py
+10_eeg_baseline_model.py <- eeg_final_model.py
+11_eeg_pca_implementation.py <- eeg_pca_efficient.py
+12_eeg_trial_pca_classification.py <- eeg_trial_pca_classification.py
+13_eeg_trial_pca_improved.py <- eeg_trial_pca_fixed.py
+14_eeg_optimal_pca_components.py <- eeg_optimal_pca.py
+15_eeg_deep_pca_model.py <- eeg_deep_pca_final.py
+16_eeg_basic_ensemble.py <- eeg_ensemble_optimal.py
+17_eeg_specialized_ensemble.py <- eeg_specialized_ensemble.py
+18_eeg_super_learner.py <- eeg_super_learner.py
+19_eeg_advanced_ensemble.py <- eeg_advanced_ensemble.py
+20_eeg_advanced_ensemble_improved.py <- eeg_advanced_ensemble_fixed.py
+21_eeg_deep_stacking.py <- eeg_deep_stacking_ensemble.py
+22_eeg_deep_stacking_improved.py <- eeg_deep_stacking_fixed.py
+23_eeg_recurrent_model.py <- eeg_recurrent_stacking.py
+24_eeg_hybrid_architecture.py <- eeg_hybrid_model.py
+25_eeg_advanced_architectures.py <- eeg_advanced_architectures.py
+26_eeg_optimized_stacking.py <- eeg_optimized_final.py
+27_eeg_combined_sessions.py <- eeg_combined_sessions.py
+28_eeg_3d_classification.py <- eeg_3d_classification.py
+29_eeg_enhanced_deep_pca.py <- eeg_enhanced_deep_pca.py
+30_eeg_ultimate_model.py <- eeg_ultimate_model.py

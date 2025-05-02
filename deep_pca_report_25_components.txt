@@ -1,0 +1,12 @@
+Classification Report - Deep PCA Model with 25 PCA Components
+
+              precision    recall  f1-score   support
+
+           0       0.40      0.46      0.43        81
+           1       0.48      0.57      0.52        81
+           2       0.33      0.37      0.35        81
+           3       0.45      0.26      0.33        81
+
+    accuracy                           0.41       324
+   macro avg       0.42      0.41      0.41       324
+weighted avg       0.42      0.41      0.41       324

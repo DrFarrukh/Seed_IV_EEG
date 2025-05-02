@@ -1,0 +1,19 @@
+OPTIMAL PCA COMPONENTS FOR COMBINED SESSIONS
+==================================================
+
+Explained Variance Thresholds:
+  70% variance: 5 components
+  80% variance: 12 components
+  85% variance: 22 components
+  90% variance: 42 components
+  95% variance: 76 components
+  99% variance: 1 components
+
+Classification Performance:
+  Best accuracy: 0.5031 with 20 components
+
+Cross-Validation Results:
+  Best CV accuracy: 0.4157 with 22 components
+
+Recommended number of PCA components:
+  22 components - good balance between accuracy and variance explained (85%)

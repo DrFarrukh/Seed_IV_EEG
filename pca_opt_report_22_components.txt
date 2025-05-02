@@ -1,0 +1,12 @@
+Classification Report - Random Forest with 22 PCA Components
+
+              precision    recall  f1-score   support
+
+           0       0.46      0.57      0.51        81
+           1       0.56      0.54      0.55        81
+           2       0.38      0.33      0.36        81
+           3       0.52      0.48      0.50        81
+
+    accuracy                           0.48       324
+   macro avg       0.48      0.48      0.48       324
+weighted avg       0.48      0.48      0.48       324

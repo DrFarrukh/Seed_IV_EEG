@@ -1,2 +1,5 @@
 *.csv
 *.h5
+*.pkl
+*/
+!/visualizations

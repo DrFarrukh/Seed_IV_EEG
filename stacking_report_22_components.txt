@@ -1,0 +1,12 @@
+Classification Report - Stacking Ensemble with 22 PCA Components
+
+              precision    recall  f1-score   support
+
+           0       0.40      0.38      0.39        81
+           1       0.52      0.37      0.43        81
+           2       0.41      0.63      0.50        81
+           3       0.42      0.33      0.37        81
+
+    accuracy                           0.43       324
+   macro avg       0.44      0.43      0.42       324
+weighted avg       0.44      0.43      0.42       324
